@@ -28,7 +28,7 @@ Objectif : réduire au maximum la surface d'attaque exposée.
 
 ## Structure du dépôt
 
-\`\`\`
+```
 homelab/
 ├── nginx/
 │   ├── conf.d/           # config nginx custom (log format Cloudflare)
@@ -37,7 +37,7 @@ homelab/
 │   └── docker-compose.yml
 └── crowdsec/
     └── docker-compose.yml
-\`\`\`
+​```
 
 Cockpit n'apparaît pas dans cette structure : installé en paquet système (\`apt install cockpit\`), pas géré par Docker Compose.
 
