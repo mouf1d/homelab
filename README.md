@@ -37,7 +37,8 @@ homelab/
 │   └── docker-compose.yml
 └── crowdsec/
     └── docker-compose.yml
-​```
+​
+```
 
 Cockpit n'apparaît pas dans cette structure : installé en paquet système (`apt install cockpit`), pas géré par Docker Compose.
 
