@@ -7,3 +7,5 @@ services:
       - "80:80"
     volumes:
       - /var/www/html:/usr/share/nginx/html:ro
+      - ./conf.d:/etc/nginx/conf.d:ro
+      - ./logs:/var/log/nginx

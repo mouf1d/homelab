@@ -21,21 +21,26 @@ Objectif : réduire au maximum la surface d'attaque exposée.
 
 | Service | Rôle | Accès |
 |---|---|---|
-| nginx | Sert mon portfolio (site statique) | Public (Cloudflare Tunnel) |
+| nginx | Sert mon portfolio (site statique), logs custom pour capter l'IP réelle des visiteurs via Cloudflare | Public (Cloudflare Tunnel) |
 | Portainer | Interface de gestion des conteneurs Docker | Tailscale uniquement |
+| CrowdSec | Détection d'intrusion : analyse les logs nginx en temps réel, détecte scans/probing/tentatives d'exploit, dashboard via CrowdSec Console | Tailscale + [CrowdSec Console](https://app.crowdsec.net) |
+| Cockpit | Monitoring système (CPU, RAM, disque, services systemd, logs). Installé nativement (pas containerisé) car nécessite un accès direct au système hôte | Tailscale |
 
 ## Structure du dépôt
-
-Chaque service a son propre dossier avec son `docker-compose.yml` :
 
 \`\`\`
 homelab/
 ├── nginx/
+│   ├── conf.d/           # config nginx custom (log format Cloudflare)
 │   └── docker-compose.yml
-└── portainer/
+├── portainer/
+│   └── docker-compose.yml
+└── crowdsec/
     └── docker-compose.yml
 \`\`\`
 
+Cockpit n'apparaît pas dans cette structure : installé en paquet système (\`apt install cockpit\`), pas géré par Docker Compose.
+
 ## Pourquoi ce projet
 
-Mise en pratique de concepts réseau/sécurité (VPN, reverse proxy, isolation de conteneurs, principe de moindre exposition) dans un environnement réel que j'administre de bout en bout.
+Mise en pratique de concepts réseau/sécurité (VPN, reverse proxy, isolation de conteneurs, détection d'intrusion, principe de moindre exposition) dans un environnement réel que j'administre de bout en bout.
